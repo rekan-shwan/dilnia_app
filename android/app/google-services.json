@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "402632613967",
+    "project_id": "dilnia-app",
+    "storage_bucket": "dilnia-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:402632613967:android:db53fcd3c7fa691d804a3a",
+        "android_client_info": {
+          "package_name": "com.dilnia.android"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmEmeChaXoWpNF_Oqal8-OKBOjxCrYR7Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:402632613967:android:9a07f041ad7a7763804a3a",
+        "android_client_info": {
+          "package_name": "com.dilnia.mobile.insurance"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmEmeChaXoWpNF_Oqal8-OKBOjxCrYR7Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
