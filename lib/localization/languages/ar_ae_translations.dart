@@ -583,10 +583,10 @@ final Map<String, String> arAE = {
 
   "lbl_your_car_coverage": "سوف تحصل على هذه التغطيات مع شراء تأمين سيارتك.",
 
-  "lbl_father": "Father",
-  "lbl_mother": "Mother",
-  "lbl_child": "Child",
-  "lbl_sister": "Sister",
-  "lbl_brother": "Brother",
-  "lbl_wife": "Wife"
+  "lbl_father": "الأب",
+  "lbl_mother": "الأم",
+  "lbl_child": "الطفل",
+  "lbl_sister": "الأخت",
+  "lbl_brother": "الأخ",
+  "lbl_wife": "الزوجة"
 };
