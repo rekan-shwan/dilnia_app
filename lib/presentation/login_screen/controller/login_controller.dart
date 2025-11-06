@@ -46,7 +46,7 @@ class LoginController extends GetxController {
       var request = http.MultipartRequest('POST', Uri.parse('$baseUrl/login'));
       final fcmToken = storage.read('fcm');
       request.fields.addAll(
-          {'email': email, 'password': password, 'fcm_token': fcmToken});
+          {'email': email??"", 'password': password??"", 'fcm_token': fcmToken??""});
       request.headers.addAll(headers);
       http.StreamedResponse response = await request.send();
 
