@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:insurance_app/core/app_export.dart';
 import 'package:insurance_app/core/utils/validation_functions.dart';
+import 'package:insurance_app/main.dart';
 import 'package:insurance_app/widgets/custom_elevated_button.dart';
 import 'package:insurance_app/widgets/custom_text_form_field.dart';
 
@@ -17,6 +18,7 @@ class LoginActiveScreen extends GetWidget<LoginActiveController> {
     mediaQueryData = MediaQuery.of(context);
     return SafeArea(
         child: Scaffold(
+            key: globalKey,
             resizeToAvoidBottomInset: true,
             backgroundColor: appTheme.whiteA700,
             body: Form(

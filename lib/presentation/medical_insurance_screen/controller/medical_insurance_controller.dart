@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:insurance_app/added/snack_bar_widget.dart';
 import 'package:insurance_app/core/app_export.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:http/http.dart' as http;
@@ -141,11 +142,13 @@ class MedicalInsuranceController extends GetxController {
     final List<XFile>? selectedImages = await _picker.pickMultiImage();
     if (selectedImages != null) {
       images.assignAll(selectedImages ?? []);
-      Get.snackbar(
-        'Success',
-        'All Images Upload Successful',
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      // Get.snackbar(
+      //   'Success',
+      //   'All Images Upload Successful',
+      //   snackPosition: SnackPosition.BOTTOM,
+      // );
+      SnackBarWidget()
+          .showSnackBar(Get.context!, 'All Images Upload Successful');
     }
   }
 
@@ -250,19 +253,17 @@ class MedicalInsuranceController extends GetxController {
         //   snackPosition: SnackPosition.BOTTOM,
         // );
       } else {
-        Get.snackbar(
-          'Error',
-          'Failed to get Details. Please try again later.',
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        // Get.snackbar(
+        //   'Error',
+        //   'Failed to get Details. Please try again later.',
+        //   snackPosition: SnackPosition.BOTTOM,
+        // );
+        SnackBarWidget().showSnackBar(
+            Get.context!, 'Failed to get Details. Please try again later.');
       }
     } catch (e) {
       debugPrint('Something went wrong: $e');
-      Get.snackbar(
-        'Error',
-        'Something went wrong: $e',
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      SnackBarWidget().showSnackBar(Get.context!, 'Something went wrong: $e');
     } finally {
       isLoading.value = false;
     }
@@ -352,11 +353,13 @@ class MedicalInsuranceController extends GetxController {
         debugPrint("str  == $str");
         final returnData = MedicalFormResponse.fromJson(str);
 
-        Get.snackbar(
-          'Success',
-          res.message ?? 'Form Submit Successful',
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        // Get.snackbar(
+        //   'Success',
+        //   res.message ?? 'Form Submit Successful',
+        //   snackPosition: SnackPosition.BOTTOM,
+        // );
+        SnackBarWidget().showSnackBar(
+            Get.context!, res.message ?? 'Form Submit Successful');
 
         // Navigate to the medical screen
         Get.toNamed(AppRoutes.paymentMethodScreen,
@@ -367,18 +370,17 @@ class MedicalInsuranceController extends GetxController {
                 lastName: '',
                 userpaymentId: returnData.data?.paymentData?[0].id ?? 0));
       } else {
-        Get.snackbar(
-          'Error',
-          res.message ?? 'Failed to submit. Please try again later.',
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        // Get.snackbar(
+        //   'Error',
+        //   res.message ?? 'Failed to submit. Please try again later.',
+        //   // snackPosition: SnackPosition.BOTTOM,
+        // );
+
+        SnackBarWidget().showSnackBar(Get.context!,
+            res.message ?? 'Failed to submit. Please try again later.');
       }
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Something went wrong: $e',
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      SnackBarWidget().showSnackBar(Get.context!, 'Something went wrong: $e');
     } finally {
       isLoading.value = false;
     }
@@ -416,25 +418,25 @@ class MedicalInsuranceController extends GetxController {
         couponController.clear();
         debugPrint("coupon subTotalAmount  == ${subTotalAmount.value}");
         update();
-        Get.snackbar(
-          'Success',
-          data.message ?? 'Coupon Added',
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        // Get.snackbar(
+        //   'Success',
+        //   data.message ?? 'Coupon Added',
+        //   snackPosition: SnackPosition.BOTTOM,
+        // );
+        SnackBarWidget()
+            .showSnackBar(Get.context!, data.message ?? 'Coupon Added');
         // Navigate to the home screen
       } else {
-        Get.snackbar(
-          'Error',
-          res.message ?? 'Failed to submit. Please try again later.',
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        // Get.snackbar(
+        //   'Error',
+        //   res.message ?? 'Failed to submit. Please try again later.',
+        //   snackPosition: SnackPosition.BOTTOM,
+        // );
+        SnackBarWidget().showSnackBar(Get.context!,
+            res.message ?? 'Failed to submit. Please try again later.');
       }
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Something went wrong: $e',
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      SnackBarWidget().showSnackBar(Get.context!, 'Something went wrong: $e');
     } finally {
       isLoading.value = false;
     }

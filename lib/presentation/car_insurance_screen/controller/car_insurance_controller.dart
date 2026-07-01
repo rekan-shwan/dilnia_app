@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:insurance_app/added/snack_bar_widget.dart';
 import 'package:insurance_app/core/app_export.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:http/http.dart' as http;
@@ -156,7 +157,7 @@ class CarInsuranceController extends GetxController {
         images.assignAll(cameraImages);
       }
     } catch (e) {
-      Get.snackbar('Error', 'Camera failed: $e');
+      SnackBarWidget().showSnackBar(Get.context!, 'Camera failed: $e');
     } finally {
       _isPicking = false;
     }
@@ -255,19 +256,19 @@ class CarInsuranceController extends GetxController {
         //   'Get Details Successful',
         //   snackPosition: SnackPosition.BOTTOM,
         // );
+        SnackBarWidget().showSnackBar(
+            Get.context!, 'Car Insurance Details Loaded Successfully');
       } else {
-        Get.snackbar(
-          'Error',
-          'Failed to get Details. Please try again later.',
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        SnackBarWidget().showSnackBar(
+            Get.context!, 'Failed to get Details. Please try again later.');
       }
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Something went wrong: $e',
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      // Get.snackbar(
+      //   'Error',
+      //   'Something went wrong: $e',
+      //   snackPosition: SnackPosition.BOTTOM,
+      // );
+      SnackBarWidget().showSnackBar(Get.context!, 'Something went wrong: $e');
     } finally {
       isLoading.value = false;
     }
@@ -344,11 +345,9 @@ class CarInsuranceController extends GetxController {
       if (response.statusCode == 201) {
         debugPrint("str  == $str");
         final returnData = CarInsuranceFromResponse.fromJson(str);
-        Get.snackbar(
-          'Success',
-          res.message ?? 'Form Submit Successful',
-          snackPosition: SnackPosition.BOTTOM,
-        );
+
+        SnackBarWidget().showSnackBar(
+            Get.context!, res.message ?? 'Form Submit Successful');
         // Navigate to the car screen
         Get.toNamed(AppRoutes.paymentMethodScreen,
             arguments: PaymentDataModel(
@@ -358,18 +357,11 @@ class CarInsuranceController extends GetxController {
                 lastName: '',
                 userpaymentId: returnData.data?.paymentData?[0].id ?? 0));
       } else {
-        Get.snackbar(
-          'Error',
-          res.message ?? 'Failed to submit. Please try again later.',
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        SnackBarWidget().showSnackBar(Get.context!,
+            res.message ?? 'Failed to submit. Please try again later.');
       }
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Something went wrong: $e',
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      SnackBarWidget().showSnackBar(Get.context!, 'Something went wrong: $e');
     } finally {
       isLoading.value = false;
     }
@@ -405,25 +397,15 @@ class CarInsuranceController extends GetxController {
         couponController.clear();
         debugPrint("coupon subTotalAmount  == ${subTotalAmount.value}");
         update();
-        Get.snackbar(
-          'Success',
-          data.message ?? 'Coupon Added',
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        SnackBarWidget()
+            .showSnackBar(Get.context!, data.message ?? 'Coupon Added');
         // Navigate to the home screen
       } else {
-        Get.snackbar(
-          'Error',
-          res.message ?? 'Failed to submit. Please try again later.',
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        SnackBarWidget().showSnackBar(Get.context!,
+            res.message ?? 'Failed to submit. Please try again later.');
       }
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Something went wrong: $e',
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      SnackBarWidget().showSnackBar(Get.context!, 'Something went wrong: $e');
     } finally {
       isLoading.value = false;
     }

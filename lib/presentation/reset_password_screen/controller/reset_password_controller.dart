@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:insurance_app/added/snack_bar_widget.dart';
 
 /// A controller class for the ResetPasswordScreen.
 import 'package:insurance_app/core/app_export.dart';
@@ -58,25 +59,30 @@ class ResetPasswordController extends GetxController {
       debugPrint("str  == $str");
       final res = ApiSuccessResponseModel.fromJson(str);
       if (response.statusCode == 200) {
-        Get.snackbar(
-          'Success',
-          res.message ?? 'Password Changed',
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        // Get.snackbar(
+        //   'Success',
+        //   res.message ?? 'Password Changed',
+        //   snackPosition: SnackPosition.BOTTOM,
+        // );
+        SnackBarWidget()
+            .showSnackBar(Get.context!, res.message ?? 'Password Changed');
         Get.toNamed(AppRoutes.loginScreen);
       } else {
-        Get.snackbar(
-          'Error',
-          res.message ?? 'Failed to Send. Please try again later.',
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        // Get.snackbar(
+        //   'Error',
+        //   res.message ?? 'Failed to Send. Please try again later.',
+        // snackPosition: SnackPosition.BOTTOM,
+        //);
+        SnackBarWidget().showSnackBar(Get.context!,
+            res.message ?? 'Failed to Send. Please try again later.');
       }
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Something went wrong: $e',
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      // Get.snackbar(
+      //   'Error',
+      //   'Something went wrong: $e',
+      //   snackPosition: SnackPosition.BOTTOM,
+      // );
+      SnackBarWidget().showSnackBar(Get.context!, 'Something went wrong: $e');
     } finally {
       isLoading.value = false;
     }

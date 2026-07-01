@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/utils.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SubmitClaimScreen extends StatefulWidget {
   const SubmitClaimScreen({super.key});
@@ -73,34 +74,43 @@ class _SubmitClaimScreenState extends State<SubmitClaimScreen> {
                 child: ListView(
                   children: [
                     ClaimCard(
-                      title: 'Health Insurance'.tr,
-                      subtitle: 'Medical expenses & treatments'.tr,
-                      icon: Icons.health_and_safety_rounded,
-                      color: const Color(0xFFEF4444),
-                      backgroundColor: const Color(0xFFFEF2F2),
-                      onTap: () =>
-                          _navigateToWebView('Health', _claimUrls['Health']!),
-                    ),
+                        title: 'Health Insurance'.tr,
+                        subtitle: 'Medical expenses & treatments'.tr,
+                        icon: Icons.health_and_safety_rounded,
+                        color: const Color(0xFFEF4444),
+                        backgroundColor: const Color(0xFFFEF2F2),
+                        onTap: () async {
+                          //_navigateToWebView('Health', _claimUrls['Health']!);
+
+                          await launchUrl(Uri.parse('${_claimUrls['Health']}'),
+                              mode: LaunchMode.externalApplication);
+                        }),
                     const SizedBox(height: 16),
                     ClaimCard(
-                      title: 'Motor Insurance'.tr,
-                      subtitle: 'Vehicle accidents & damages'.tr,
-                      icon: Icons.directions_car_rounded,
-                      color: const Color(0xFF3B82F6),
-                      backgroundColor: const Color(0xFFEFF6FF),
-                      onTap: () =>
-                          _navigateToWebView('Motor', _claimUrls['Motor']!),
-                    ),
+                        title: 'Motor Insurance'.tr,
+                        subtitle: 'Vehicle accidents & damages'.tr,
+                        icon: Icons.directions_car_rounded,
+                        color: const Color(0xFF3B82F6),
+                        backgroundColor: const Color(0xFFEFF6FF),
+                        onTap: () async {
+                          await launchUrl(Uri.parse('${_claimUrls['Motor']}'),
+                              mode: LaunchMode.externalApplication);
+                        }
+                        // _navigateToWebView('Motor', _claimUrls['Motor']!),
+                        ),
                     const SizedBox(height: 16),
                     ClaimCard(
-                      title: 'Other Claims'.tr,
-                      subtitle: 'Property, travel & other insurance'.tr,
-                      icon: Icons.category_rounded,
-                      color: const Color(0xFF10B981),
-                      backgroundColor: const Color(0xFFF0FDF4),
-                      onTap: () =>
-                          _navigateToWebView('Other', _claimUrls['Other']!),
-                    ),
+                        title: 'Other Claims'.tr,
+                        subtitle: 'Property, travel & other insurance'.tr,
+                        icon: Icons.category_rounded,
+                        color: const Color(0xFF10B981),
+                        backgroundColor: const Color(0xFFF0FDF4),
+                        onTap: () {
+                          launchUrl(Uri.parse('${_claimUrls['Other']}'),
+                              mode: LaunchMode.externalApplication);
+                        }
+                        // _navigateToWebView('Other', _claimUrls['Other']!),
+                        ),
                   ],
                 ),
               ),

@@ -33,11 +33,7 @@ class SignUpController extends GetxController {
     final name = firstnameController.text.trim();
     final phone = phoneController.text.trim();
     if (email.isEmpty || password.isEmpty) {
-      Get.snackbar(
-        'Error',
-        'Email and Password cannot be empty',
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      snackbarAlert(Get.context!, 'Email and Password cannot be empty');
       return;
     }
 
@@ -66,27 +62,16 @@ class SignUpController extends GetxController {
       debugPrint("str  == $str");
       final res = ApiSuccessResponseModel.fromJson(str);
       if (response.statusCode == 200) {
-        Get.snackbar(
-          'Success',
-          res.message ?? 'Registration Successful',
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        snackbarAlert(Get.context!, res.message ?? 'Registration Successful');
         // Navigate to the home screen
         Get.toNamed(AppRoutes.otpVerificationScreen,
             arguments: [email, phone, 'registration']);
       } else {
-        Get.snackbar(
-          'Error',
-          res.message ?? 'Failed to register. Please try again later.',
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        snackbarAlert(Get.context!,
+            res.message ?? 'Failed to register. Please try again later.');
       }
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Something went wrong: $e',
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      snackbarAlert(Get.context!, 'Something went wrong: $e');
     } finally {
       isLoading.value = false;
     }
@@ -100,5 +85,13 @@ class SignUpController extends GetxController {
     // firstnameController.dispose();
     // phoneController.dispose();
     // passwordController.dispose();
+  }
+
+  void snackbarAlert(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+      ),
+    );
   }
 }

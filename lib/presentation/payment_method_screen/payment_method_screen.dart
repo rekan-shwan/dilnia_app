@@ -311,7 +311,9 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
             height: getVerticalSize(79),
             leadingWidth: getSize(42),
             leading: IconButton(
-              onPressed: () => Get.back(),
+              onPressed: () {
+                Get.toNamed(AppRoutes.homeScreenContainer1Screen);
+              },
               icon: Icon(Icons.arrow_back_ios, color: Colors.black, size: 20),
             ),
             centerTitle: false,

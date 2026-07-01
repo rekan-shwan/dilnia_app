@@ -381,6 +381,7 @@ class _HomeInsuranceContainerPageState
               contentPadding:
                   getPadding(left: 16, top: 17, right: 16, bottom: 17),
               hintText: "lbl_email_address".tr,
+              textInputType: TextInputType.emailAddress,
               textInputAction: TextInputAction.next,
               filled: true,
               fillColor: appTheme.gray200,

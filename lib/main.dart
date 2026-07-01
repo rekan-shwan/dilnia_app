@@ -6,12 +6,15 @@ import 'package:insurance_app/localization/controller/localization_controller.da
 import 'core/app_export.dart';
 import 'notification/notification_service.dart';
 
+GlobalKey<ScaffoldMessengerState> globalKey =
+    GlobalKey<ScaffoldMessengerState>();
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await GetStorage.init();
   await Firebase.initializeApp();
-  await NotificationService.instance.initialize();
+  //await NotificationService.instance.initialize();
 
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(
@@ -41,48 +44,47 @@ class MyApp extends StatelessWidget {
     final LocalizationController localeController =
         Get.put(LocalizationController());
 
-    return Obx(() {
-      return GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          buttonTheme: buttonTheme,
-          splashFactory: NoSplash.splashFactory,
-          highlightColor: Colors.transparent,
-          splashColor: Colors.transparent,
-          useMaterial3: true,
-          fontFamily: _getFontFamily(localeController.currentLocale.value),
-          visualDensity: VisualDensity.standard,
-          bottomSheetTheme: BottomSheetThemeData(
-            surfaceTintColor: appTheme.whiteA700,
-            backgroundColor: appTheme.whiteA700,
-          ),
-          dialogTheme: DialogThemeData(
-              backgroundColor: appTheme.whiteA700,
-              surfaceTintColor: appTheme.whiteA700),
-        ),
-        translations: AppLocalization(),
-        locale: localeController.currentLocale.value,
-        fallbackLocale: const Locale('en', 'US'),
-        supportedLocales: const [
-          Locale('en', 'US'),
-          Locale('ar', 'AE'),
-          //  Locale('ur'),
-        ],
-        localizationsDelegates: const [
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        title: 'Dilnia Insurance App',
-        initialBinding: InitialBindings(),
-        // initialRoute: AppRoutes.carInsuranceRoute,
-        initialRoute: AppRoutes.initialRoute,
-        //initialRoute: AppRoutes.homeInsuranceRoute,
-        //initialRoute: AppRoutes.homeScreenContainer1Screen,
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
 
-        getPages: AppRoutes.pages,
-      );
-    });
+      theme: ThemeData(
+        buttonTheme: buttonTheme,
+        splashFactory: NoSplash.splashFactory,
+        highlightColor: Colors.transparent,
+        splashColor: Colors.transparent,
+        useMaterial3: true,
+        fontFamily: _getFontFamily(localeController.currentLocale.value),
+        visualDensity: VisualDensity.standard,
+        bottomSheetTheme: BottomSheetThemeData(
+          surfaceTintColor: appTheme.whiteA700,
+          backgroundColor: appTheme.whiteA700,
+        ),
+        dialogTheme: DialogThemeData(
+            backgroundColor: appTheme.whiteA700,
+            surfaceTintColor: appTheme.whiteA700),
+      ),
+      translations: AppLocalization(),
+      locale: localeController.currentLocale.value,
+      fallbackLocale: const Locale('en', 'US'),
+      supportedLocales: const [
+        Locale('en', 'US'),
+        Locale('ar', 'AE'),
+        //  Locale('ur'),
+      ],
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      title: 'Dilnia Insurance App',
+      initialBinding: InitialBindings(),
+      // initialRoute: AppRoutes.carInsuranceRoute,
+      initialRoute: AppRoutes.initialRoute,
+      //initialRoute: AppRoutes.homeInsuranceRoute,
+      //initialRoute: AppRoutes.homeScreenContainer1Screen,
+
+      getPages: AppRoutes.pages,
+    );
   }
 
   String _getFontFamily(Locale locale) {

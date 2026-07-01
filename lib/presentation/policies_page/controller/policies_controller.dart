@@ -1,3 +1,4 @@
+import 'package:insurance_app/added/snack_bar_widget.dart';
 import 'package:insurance_app/core/app_export.dart';
 
 import '../models/mypolicies_item_model.dart';
@@ -52,18 +53,21 @@ class PoliciesController extends GetxController {
         //   snackPosition: SnackPosition.BOTTOM,
         // );
       } else {
-        Get.snackbar(
-          'Error',
-          'Failed to get Insurance List. Please try again later.',
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        // Get.snackbar(
+        //   'Error',
+        //   'Failed to get Insurance List. Please try again later.',
+        //   snackPosition: SnackPosition.BOTTOM,
+        // );
+        SnackBarWidget().showSnackBar(Get.context!,
+            'Failed to get Insurance List. Please try again later.');
       }
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Something went wrong: $e',
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      // Get.snackbar(
+      //   'Error',
+      //   'Something went wrong: $e',
+      //   snackPosition: SnackPosition.BOTTOM,
+      // );
+      SnackBarWidget().showSnackBar(Get.context!, 'Something went wrong: $e');
     } finally {
       isLoading.value = false;
     }

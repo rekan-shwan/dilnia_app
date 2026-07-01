@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:insurance_app/added/snack_bar_widget.dart';
 
 /// A controller class for the FeedbackScreen.
 import 'package:insurance_app/core/app_export.dart';
@@ -56,18 +57,21 @@ class TicketDetailsController extends GetxController {
         //   snackPosition: SnackPosition.BOTTOM,
         // );
       } else {
-        Get.snackbar(
-          'Error',
-          'Failed to get Ticket Details. Please try again later.',
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        // Get.snackbar(
+        //   'Error',
+        //   'Failed to get Ticket Details. Please try again later.',
+        //   snackPosition: SnackPosition.BOTTOM,
+        // );
+        SnackBarWidget().showSnackBar(Get.context!,
+            'Failed to get Ticket Details. Please try again later.');
       }
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Something went wrong: $e',
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      // Get.snackbar(
+      //   'Error',
+      //   'Something went wrong: $e',
+      //   snackPosition: SnackPosition.BOTTOM,
+      // );
+      SnackBarWidget().showSnackBar(Get.context!, 'Something went wrong: $e');
     } finally {
       isLoading.value = false;
     }
@@ -98,24 +102,29 @@ class TicketDetailsController extends GetxController {
       if (response.statusCode == 201) {
         debugPrint("Ticket Reply str = $str");
         ticketDetails();
-        Get.snackbar(
-          'Success',
-          res.message ?? 'Ticket Reply Successfully',
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        // Get.snackbar(
+        //   'Success',
+        //   res.message ?? 'Ticket Reply Successfully',
+        //   snackPosition: SnackPosition.BOTTOM,
+        // );
+        SnackBarWidget().showSnackBar(
+            Get.context!, res.message ?? 'Ticket Reply Successfully');
       } else {
-        Get.snackbar(
-          'Error',
-          res.message ?? 'Failed to Reply. Please try again later.',
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        // Get.snackbar(
+        //   'Error',
+        //   res.message ?? 'Failed to Reply. Please try again later.',
+        //   snackPosition: SnackPosition.BOTTOM,
+        // );
+        SnackBarWidget().showSnackBar(Get.context!,
+            res.message ?? 'Failed to Reply. Please try again later.');
       }
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Something went wrong: $e',
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      // Get.snackbar(
+      //   'Error',
+      //   'Something went wrong: $e',
+      //   snackPosition: SnackPosition.BOTTOM,
+      // );
+      SnackBarWidget().showSnackBar(Get.context!, 'Something went wrong: $e');
     } finally {
       detailsController.clear();
       isLoading.value = false;

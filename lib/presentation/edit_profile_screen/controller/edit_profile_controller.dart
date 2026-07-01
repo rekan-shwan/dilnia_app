@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:insurance_app/added/snack_bar_widget.dart';
 
 /// A controller class for the EditProfileScreen.
 import 'package:insurance_app/core/app_export.dart';
@@ -103,25 +104,16 @@ class EditProfileController extends GetxController {
 
         Get.back();
 
-        Get.snackbar(
-          'Success',
-          res.message ?? 'Profile Updated',
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        SnackBarWidget()
+            .showSnackBar(Get.context!, res.message ?? 'Profile Updated');
+
         // Navigate to the home screen
       } else {
-        Get.snackbar(
-          'Error',
-          res.message ?? 'Failed to submit. Please try again later.',
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        SnackBarWidget().showSnackBar(Get.context!,
+            res.message ?? 'Failed to submit. Please try again later.');
       }
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Something went wrong: $e',
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      SnackBarWidget().showSnackBar(Get.context!, 'Something went wrong: $e');
     } finally {
       isLoading.value = false;
     }

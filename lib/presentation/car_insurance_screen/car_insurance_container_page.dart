@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_stepper/easy_stepper.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:insurance_app/added/custom_drop_search_widget.dart';
 import 'package:insurance_app/core/utils/custom_dropdown_field.dart';
@@ -383,6 +384,7 @@ class _CarInsuranceContainerPageState extends State<CarInsuranceContainerPage> {
                   getPadding(left: 16, top: 17, right: 16, bottom: 17),
               hintText: "lbl_email_address".tr,
               textInputAction: TextInputAction.next,
+              textInputType: TextInputType.emailAddress,
               filled: true,
               fillColor: appTheme.gray200,
               validator: (value) {

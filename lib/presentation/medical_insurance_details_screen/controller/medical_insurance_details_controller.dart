@@ -1,3 +1,4 @@
+import 'package:insurance_app/added/snack_bar_widget.dart';
 import 'package:insurance_app/core/app_export.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -53,24 +54,29 @@ class MedicalInsuranceDetailsController extends GetxController {
         update();
         isLoading.value = false;
         debugPrint("Details Data == ${listModel.toString()}");
-        Get.snackbar(
-          'Success',
-          'Get Medical Insurance Details Successfully',
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        // Get.snackbar(
+        //   'Success',
+        //   'Get Medical Insurance Details Successfully',
+        //   snackPosition: SnackPosition.BOTTOM,
+        // );
+        SnackBarWidget().showSnackBar(
+            Get.context!, 'Medical Insurance Details Loaded Successfully');
       } else {
-        Get.snackbar(
-          'Error',
-          'Failed to get Medical Insurance Details. Please try again later.',
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        // Get.snackbar(
+        //   'Error',
+        //   'Failed to get Medical Insurance Details. Please try again later.',
+        //   snackPosition: SnackPosition.BOTTOM,
+        // );
+        SnackBarWidget().showSnackBar(Get.context!,
+            'Failed to get Medical Insurance Details. Please try again later.');
       }
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Something went wrong: $e',
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      // Get.snackbar(
+      //   'Error',
+      //   'Something went wrong: $e',
+      //   snackPosition: SnackPosition.BOTTOM,
+      // );
+      SnackBarWidget().showSnackBar(Get.context!, 'Something went wrong: $e');
     } finally {
       isLoading.value = false;
     }

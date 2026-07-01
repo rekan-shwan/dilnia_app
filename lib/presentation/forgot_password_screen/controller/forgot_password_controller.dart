@@ -1,3 +1,4 @@
+import 'package:insurance_app/added/snack_bar_widget.dart';
 import 'package:insurance_app/core/app_export.dart';
 import 'package:insurance_app/presentation/forgot_password_screen/models/forgot_password_model.dart';
 import 'package:flutter/material.dart';
@@ -41,17 +42,15 @@ class ForgotPasswordController extends GetxController {
       final res = ApiSuccessResponseModel.fromJson(str);
 
       if (response.statusCode == 200) {
-        Get.snackbar('Success', res.message ?? 'OTP Sent',
-            snackPosition: SnackPosition.BOTTOM);
+        SnackBarWidget().showSnackBar(Get.context!, res.message ?? 'OTP Sent');
         Get.toNamed(AppRoutes.otpVerificationScreen,
             arguments: [email, phone, type]);
       } else {
-        Get.snackbar('Error', res.message ?? 'Failed to send OTP',
-            snackPosition: SnackPosition.BOTTOM);
+        SnackBarWidget()
+            .showSnackBar(Get.context!, res.message ?? 'Failed to send OTP');
       }
     } catch (e) {
-      Get.snackbar('Error', 'Something went wrong: $e',
-          snackPosition: SnackPosition.BOTTOM);
+      SnackBarWidget().showSnackBar(Get.context!, 'Something went wrong: $e');
     } finally {
       isLoading.value = false; // يرجع الحالة لطبيعتها
     }

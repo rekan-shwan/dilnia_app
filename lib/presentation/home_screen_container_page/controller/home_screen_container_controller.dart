@@ -1,4 +1,5 @@
 import 'package:get_storage/get_storage.dart';
+import 'package:insurance_app/added/snack_bar_widget.dart';
 import 'package:insurance_app/core/app_export.dart';
 import 'package:insurance_app/presentation/home_screen_container_page/models/home_screen_container_model.dart';
 
@@ -84,18 +85,18 @@ class HomeScreenContainerController extends GetxController {
         //   snackPosition: SnackPosition.BOTTOM,
         // );
       } else {
-        Get.snackbar(
-          'Error',
-          'Failed to get Banner. Please try again later.',
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        debugPrint(
+            "Failed to load banners. Status code: ${response.statusCode}");
+        // Get.snackbar(
+        //   'Error',
+        //   'Failed to load banners. Please try again later.',
+        //   snackPosition: SnackPosition.BOTTOM,
+        // );
+        SnackBarWidget().showSnackBar(
+            Get.context!, 'Failed to load banners. Please try again later.');
       }
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Something went wrong: $e',
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      SnackBarWidget().showSnackBar(Get.context!, 'Something went wrong: $e');
     } finally {
       isLoading.value = false;
     }

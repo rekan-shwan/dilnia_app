@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:insurance_app/added/snack_bar_widget.dart';
 import 'package:insurance_app/added/submit_claim_screen.dart';
 import 'package:insurance_app/core/app_export.dart';
 import 'package:insurance_app/presentation/aqsati/aqsati_controller.dart';
@@ -268,11 +269,8 @@ class _HomeScreenContainerPageState extends State<HomeScreenContainerPage> {
                               onTravelInsurance();
                             } else {
                               //onTapCheckprice();
-                              Get.snackbar(
-                                'Success',
-                                'Feature Will Coming Soon',
-                                snackPosition: SnackPosition.BOTTOM,
-                              );
+                              SnackBarWidget().showSnackBar(
+                                  context, 'Service not available yet');
                             }
                           });
                         }),

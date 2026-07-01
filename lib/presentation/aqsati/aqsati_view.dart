@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:insurance_app/added/snack_bar_widget.dart';
 import 'aqsati_controller.dart';
 
 class AqsatiView extends StatelessWidget {
@@ -35,7 +36,9 @@ class AqsatiView extends StatelessWidget {
                         if (identity.isNotEmpty) {
                           controller.getCustomerInfo(identity);
                         } else {
-                          Get.snackbar('خطأ', 'من فضلك أدخل الرقم');
+                          //Get.snackbar('خطأ', 'من فضلك أدخل الرقم');
+                          SnackBarWidget()
+                              .showSnackBar(Get.context!, 'من فضلك أدخل الرقم');
                         }
                       },
                       icon: const Icon(Icons.search),

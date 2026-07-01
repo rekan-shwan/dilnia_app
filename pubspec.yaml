@@ -39,7 +39,7 @@ dependencies:
   get_storage: ^2.1.1
   flutter_widget_from_html_core: ^0.15.2
   image_picker: ^1.1.2
-  date_picker_plus: ^4.1.0
+  date_picker_plus: ^7.0.1
   country_picker: ^2.0.27
 
   firebase_core: ^3.11.0
@@ -54,8 +54,8 @@ dependencies:
   open_file: ^3.5.10
   dropdown_button2: ^2.3.9
   flutter_inappwebview: ^6.1.5
-
   rename_app: ^1.6.5
+  flutter_launcher_icons: ^0.14.4
 
   
 dev_dependencies:
@@ -70,6 +70,7 @@ flutter:
   assets:
     - assets/
     - assets/images/
+    - assets/icon.jpeg
   fonts:
     - family: SF Pro Display
       fonts:
@@ -95,3 +96,8 @@ flutter:
       
      
         
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon.jpeg"
+  remove_alpha_ios: true

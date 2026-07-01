@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:insurance_app/added/snack_bar_widget.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 
 import 'package:insurance_app/core/app_export.dart';
@@ -58,8 +59,9 @@ class OtpVerificationController extends GetxController with CodeAutoFill {
     debugPrint("Phone: $phone");
     debugPrint("Type: $type");
     if (otp.isEmpty) {
-      Get.snackbar('Error', 'OTP cannot be empty',
-          snackPosition: SnackPosition.BOTTOM);
+      // Get.snackbar('Error', 'OTP cannot be empty',
+      //     snackPosition: SnackPosition.BOTTOM);
+      SnackBarWidget().showSnackBar(Get.context!, 'OTP cannot be empty');
       return;
     }
 
@@ -85,20 +87,19 @@ class OtpVerificationController extends GetxController with CodeAutoFill {
       final res = ApiSuccessResponseModel.fromJson(str);
 
       if (response.statusCode == 200) {
-        Get.snackbar('Success', res.message ?? 'OTP Verified',
-            snackPosition: SnackPosition.BOTTOM);
+        SnackBarWidget()
+            .showSnackBar(Get.context!, res.message ?? 'OTP Verified');
         if (type == 'registration') {
           Get.toNamed(AppRoutes.loginScreen);
         } else if (type == 'forgot_pass') {
           Get.toNamed(AppRoutes.resetPasswordScreen, arguments: [email, phone]);
         }
       } else {
-        Get.snackbar('Error', res.message ?? 'Failed to verify OTP',
-            snackPosition: SnackPosition.BOTTOM);
+        SnackBarWidget()
+            .showSnackBar(Get.context!, res.message ?? 'Failed to verify OTP');
       }
     } catch (e) {
-      Get.snackbar('Error', 'Something went wrong: $e',
-          snackPosition: SnackPosition.BOTTOM);
+      SnackBarWidget().showSnackBar(Get.context!, 'Something went wrong: $e');
     } finally {
       isLoading.value = false;
     }
@@ -107,8 +108,7 @@ class OtpVerificationController extends GetxController with CodeAutoFill {
   /// Resend OTP API + Timer restart
   Future<void> resendOtp() async {
     if (theDataFromPreviousPage == null || theDataFromPreviousPage.length < 3) {
-      Get.snackbar('Error', 'Missing data to resend OTP',
-          snackPosition: SnackPosition.BOTTOM);
+      SnackBarWidget().showSnackBar(Get.context!, 'Missing data to resend OTP');
       return;
     }
 
@@ -137,16 +137,14 @@ class OtpVerificationController extends GetxController with CodeAutoFill {
       final res = ApiSuccessResponseModel.fromJson(str);
 
       if (response.statusCode == 200) {
-        Get.snackbar('Success', res.message ?? 'OTP Sent',
-            snackPosition: SnackPosition.BOTTOM);
+        SnackBarWidget().showSnackBar(Get.context!, res.message ?? 'OTP Sent');
         startTimer();
       } else {
-        Get.snackbar('Error', res.message ?? 'Failed to send OTP',
-            snackPosition: SnackPosition.BOTTOM);
+        SnackBarWidget()
+            .showSnackBar(Get.context!, res.message ?? 'Failed to send OTP');
       }
     } catch (e) {
-      Get.snackbar('Error', 'Something went wrong: $e',
-          snackPosition: SnackPosition.BOTTOM);
+      SnackBarWidget().showSnackBar(Get.context!, 'Something went wrong: $e');
     } finally {
       isLoading.value = false;
     }

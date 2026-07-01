@@ -565,6 +565,7 @@
 //   }
 // }
 import 'dart:typed_data';
+import 'package:insurance_app/added/snack_bar_widget.dart';
 import 'package:insurance_app/core/app_export.dart';
 import 'package:insurance_app/presentation/payment_method_screen/models/payment_method_model.dart';
 import 'package:http/http.dart' as http;
@@ -782,19 +783,19 @@ class PaymentMethodController extends GetxController {
               arguments: ["aqsati", paymentDataModel.invoiceId]);
         } else {
           debugPrint("❌ payment_url is null or missing in response");
-          Get.snackbar('Error', 'Redirect URL not found',
-              snackPosition: SnackPosition.BOTTOM);
+          // Get.snackbar('Error', 'Redirect URL not found',
+          //     snackPosition: SnackPosition.BOTTOM);
+          SnackBarWidget().showSnackBar(Get.context!, 'Redirect URL not found');
         }
       } else {
         final error = jsonDecode(response.body)['message'] ?? 'Unknown error';
         debugPrint("❌ Error from server: $error");
-        Get.snackbar('Error', error, snackPosition: SnackPosition.BOTTOM);
+        SnackBarWidget().showSnackBar(Get.context!, error);
       }
     } catch (e, stack) {
       debugPrint("❌ Exception: $e");
       debugPrint("❌ Stacktrace: $stack");
-      Get.snackbar('Error', 'Something went wrong: $e',
-          snackPosition: SnackPosition.BOTTOM);
+      SnackBarWidget().showSnackBar(Get.context!, 'Something went wrong: $e');
     } finally {
       isLoading.value = false;
     }
@@ -822,26 +823,26 @@ class PaymentMethodController extends GetxController {
       if (response.statusCode == 200) {
         Get.toNamed(AppRoutes.paymentConfirmOneScreen,
             arguments: [successUrlV, paymentDataModel.invoiceId]);
-        Get.snackbar(
-          'Success',
-          'Payment Added Successfully',
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        // Get.snackbar(
+        //   'Success',
+        //   'Payment Added Successfully',
+        //   snackPosition: SnackPosition.BOTTOM,
+        // );
+        SnackBarWidget()
+            .showSnackBar(Get.context!, 'Payment Added Successfully');
       } else {
         Get.toNamed(AppRoutes.paymentConfirmOneScreen,
             arguments: [errorUrlV, paymentDataModel.invoiceId]);
-        Get.snackbar(
-          'Error',
-          'Failed to paid. Please try again later.',
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        // Get.snackbar(
+        //     'Error',
+        //   'Failed to paid. Please try again later.',
+        //   snackPosition: SnackPosition.BOTTOM,
+        // );
+        SnackBarWidget().showSnackBar(
+            Get.context!, 'Failed to paid. Please try again later.');
       }
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Something went wrong: $e',
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      SnackBarWidget().showSnackBar(Get.context!, 'Something went wrong: $e');
     } finally {
       isLoading.value = false;
     }
@@ -909,18 +910,16 @@ class PaymentMethodController extends GetxController {
         isLoading.value = false;
         debugPrint("paymentData == ${paymentData.toString()}");
       } else {
-        Get.snackbar(
-          'Error',
-          'Failed to get Payment Methods. Please try again later.',
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        // Get.snackbar(
+        //   'Error',
+        //   'Failed to get Payment Methods. Please try again later.',
+        //   snackPosition: SnackPosition.BOTTOM,
+        // );
+        SnackBarWidget().showSnackBar(Get.context!,
+            'Failed to get Payment Methods. Please try again later.');
       }
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Something went wrong: $e',
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      SnackBarWidget().showSnackBar(Get.context!, 'Something went wrong: $e');
     } finally {
       isLoading.value = false;
     }
@@ -1001,21 +1000,25 @@ class PaymentMethodController extends GetxController {
         setController(paymentUrl.value);
         return responseBody['redirectUrl'];
       } else {
-        Get.snackbar(
-          'Error',
-          '${responseBody['errorMessage']}',
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        // Get.snackbar(
+        //   'Error',
+        //   '${responseBody['errorMessage']}',
+        //   snackPosition: SnackPosition.BOTTOM,
+        // );
+        SnackBarWidget()
+            .showSnackBar(Get.context!, '${responseBody['errorMessage']}');
         throw Exception(
             "Payment Error: ${responseBody['errorMessage'] ?? 'Unknown error'}");
       }
     } else {
       debugPrint("HTTP Error");
-      Get.snackbar(
-        'Error',
-        jsonDecode(response.body)['errorMessage'],
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      // Get.snackbar(
+      //   'Error',
+      //   jsonDecode(response.body)['errorMessage'],
+      //   snackPosition: SnackPosition.BOTTOM,
+      // );
+      SnackBarWidget().showSnackBar(
+          Get.context!, jsonDecode(response.body)['errorMessage']);
       throw Exception("HTTP Error: ${response.statusCode}");
     }
   }
@@ -1038,11 +1041,13 @@ class PaymentMethodController extends GetxController {
       final body = json.decode(response.body);
       return body['access_token'];
     } else {
-      Get.snackbar(
-        'Error',
-        '${json.decode(response.body)["error"]}',
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      // Get.snackbar(
+      //   'Error',
+      //   '${json.decode(response.body)["error"]}',
+      //   snackPosition: SnackPosition.BOTTOM,
+      // );
+      SnackBarWidget()
+          .showSnackBar(Get.context!, '${json.decode(response.body)["error"]}');
       return null;
     }
   }
@@ -1082,11 +1087,13 @@ class PaymentMethodController extends GetxController {
       debugPrint("FIB corporateAppLink == ${corporateAppLink.value}");
       return json.decode(response.body);
     } else {
-      Get.snackbar(
-        'Error',
-        '${json.decode(response.body)["error"]}',
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      // Get.snackbar(
+      //   'Error',
+      //   '${json.decode(response.body)["error"]}',
+      //   snackPosition: SnackPosition.BOTTOM,
+      // );
+      SnackBarWidget()
+          .showSnackBar(Get.context!, '${json.decode(response.body)["error"]}');
       return null;
     }
   }
@@ -1126,18 +1133,21 @@ class PaymentMethodController extends GetxController {
           setController(paymentUrl.value);
         } else {
           print("❗ payment_url not found in response.");
-          Get.snackbar('Error', 'Redirect URL not found',
-              snackPosition: SnackPosition.BOTTOM);
+          // Get.snackbar('Error', 'Redirect URL not found',
+          //     snackPosition: SnackPosition.BOTTOM);
+          SnackBarWidget().showSnackBar(Get.context!, 'Redirect URL not found');
         }
       } else {
         print("----->4");
         final error = jsonDecode(response.body)['message'] ?? 'Unknown error';
-        Get.snackbar('Error', error, snackPosition: SnackPosition.BOTTOM);
+        // Get.snackbar('Error', error, snackPosition: SnackPosition.BOTTOM);
+        SnackBarWidget().showSnackBar(Get.context!, error);
       }
     } catch (e) {
       print("----->5");
-      Get.snackbar('Error', 'Something went wrong: $e',
-          snackPosition: SnackPosition.BOTTOM);
+      // Get.snackbar('Error', 'Something went wrong: $e',
+      //     snackPosition: SnackPosition.BOTTOM);
+      SnackBarWidget().showSnackBar(Get.context!, 'Something went wrong: $e');
     }
   }
 
@@ -1158,28 +1168,33 @@ class PaymentMethodController extends GetxController {
         if (paymentStatus.toLowerCase() == 'paid') {
           updatePayment();
         } else {
-          Get.snackbar(
-            'Error',
-            'Payment Status $paymentStatus',
-            snackPosition: SnackPosition.BOTTOM,
-          );
+          // Get.snackbar(
+          //   'Error',
+          //   'Payment Status $paymentStatus',
+          //   snackPosition: SnackPosition.BOTTOM,
+          // );
+          SnackBarWidget()
+              .showSnackBar(Get.context!, 'Payment Status $paymentStatus');
         }
         return str;
       } else {
-        Get.snackbar(
-          'Error',
-          '${json.decode(str)["error"]}',
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        // Get.snackbar(
+        //   'Error',
+        //   '${json.decode(str)["error"]}',
+        //   snackPosition: SnackPosition.BOTTOM,
+        // );
+        SnackBarWidget()
+            .showSnackBar(Get.context!, '${json.decode(str)["error"]}');
         return null;
       }
     } catch (e) {
       debugPrint("FIB e ==$e");
-      Get.snackbar(
-        'Error',
-        'Something went wrong: $e',
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      // Get.snackbar(
+      //   'Error',
+      //   'Something went wrong: $e',
+      //   snackPosition: SnackPosition.BOTTOM,
+      // );
+      SnackBarWidget().showSnackBar(Get.context!, 'Something went wrong: $e');
     } finally {
       // isLoading.value = false;
     }

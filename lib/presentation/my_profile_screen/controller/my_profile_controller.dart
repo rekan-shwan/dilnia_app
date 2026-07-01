@@ -1,3 +1,4 @@
+import 'package:insurance_app/added/snack_bar_widget.dart';
 import 'package:insurance_app/core/app_export.dart';
 import 'package:insurance_app/presentation/my_profile_screen/models/my_profile_model.dart';
 import 'package:flutter/material.dart';
@@ -69,19 +70,14 @@ class MyProfileController extends GetxController {
         //   'Get User Details Successful',
         //   snackPosition: SnackPosition.BOTTOM,
         // );
+        SnackBarWidget()
+            .showSnackBar(Get.context!, 'User Details Loaded Successfully');
       } else {
-        Get.snackbar(
-          'Error',
-          'Failed to get User Details. Please try again later.',
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        SnackBarWidget().showSnackBar(Get.context!,
+            'Failed to get User Details. Please try again later.');
       }
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Something went wrong: $e',
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      SnackBarWidget().showSnackBar(Get.context!, 'Something went wrong: $e');
     } finally {
       isLoading.value = false;
     }
