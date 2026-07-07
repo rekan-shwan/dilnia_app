@@ -14,7 +14,7 @@ void main() async {
 
   await GetStorage.init();
   await Firebase.initializeApp();
-  //await NotificationService.instance.initialize();
+  await NotificationService.instance.initialize();
 
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(

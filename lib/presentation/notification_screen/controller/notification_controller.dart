@@ -39,9 +39,18 @@ class NotificationControllers extends GetxController {
 
       var request =
           http.Request('GET', Uri.parse('$baseUrl/user/notification/list'));
+      debugPrint("url = ${request.url}");
+      debugPrint("headers = ${request.headers}");
+
+      debugPrint("request = ${request.body}");
+      debugPrint("request = ${request.method}");
+      debugPrint("request = ${request.encoding}");
+      debugPrint("request = ${request.persistentConnection}");
 
       request.headers.addAll(headers);
       http.StreamedResponse response = await request.send();
+
+      debugPrint("response = ${response.statusCode}");
 
       var str = await response.stream.bytesToString();
 
